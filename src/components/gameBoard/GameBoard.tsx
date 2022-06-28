@@ -1,10 +1,21 @@
 import Container from '../styled-generics/Container'
-import { emojisData } from '../../emojisData'
 import Card from '../styled-generics/Card'
-import { EmojisArr } from '../../types'
+
+import { emojisData } from '../../emojisData'
+
+import { EmojisArr, State, Dispatch, Action } from '../../types'
+
 import { useState } from 'react'
 
-function GameBoard() {
+function GameBoard({
+	state,
+	dispatch,
+	action,
+}: {
+	state: State
+	dispatch: React.Dispatch<Dispatch>
+	action: Action
+}): JSX.Element {
 	const [subsetEmojis, setSubsetEmojis] = useState<EmojisArr>(emojisData.slice(0, 10))
 	const [allEmojis, setAllEmojis] = useState(subsetEmojis)
 	const [clickedEmojis, setClickedEmojis] = useState<Set<string>>(new Set())
@@ -42,14 +53,14 @@ function GameBoard() {
 			setScore(0)
 			setClickedEmojis(new Set())
 			//game over function
-			alert('Game Over')
+			console.warn('game over')
 		}
 		console.log(clickedEmojis)
 	}
 
 	function storeHighScore(score_: number): void {
 		if (!localStorage.getItem('highScore')) {
-			localStorage.setItem('highScore', JSON.stringify(0))
+			localStorage.setItem('highScore', JSON.stringify(score_))
 		}
 
 		const storageHighScore: number = JSON.parse(localStorage.getItem('highScore') ?? '0')
@@ -57,8 +68,8 @@ function GameBoard() {
 		console.log({ storageHighScore })
 
 		if (score_ > storageHighScore) {
-			setHighScore(storageHighScore)
-			localStorage.setItem('highScore', JSON.stringify(storageHighScore))
+			setHighScore(score_)
+			localStorage.setItem('highScore', JSON.stringify(score_))
 		}
 	}
 

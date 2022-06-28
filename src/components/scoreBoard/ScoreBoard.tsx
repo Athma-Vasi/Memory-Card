@@ -1,6 +1,15 @@
 import { Header } from '../styled-generics/Header'
+import { State, Dispatch, Action } from '../../types'
 
-function ScoreBoard() {
+function ScoreBoard({
+	state,
+	dispatch,
+	action,
+}: {
+	state: State
+	dispatch: React.Dispatch<Dispatch>
+	action: Action
+}): JSX.Element {
 	return (
 		<>
 			<Header>

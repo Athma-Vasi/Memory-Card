@@ -67,4 +67,23 @@ type EmojisArr = {
 	variants?: { slug: string; character: string }[]
 }[]
 
-export { EmojisArr, EmojisGroup, EmojisVariant }
+type State = {
+	subsetEmojis: EmojisArr
+	allEmojis: EmojisArr
+	clickedEmojis: Set<string>
+	score: number
+	highScore: number
+	isGameRunning?: boolean
+	isDarkMode?: boolean
+}
+
+type Dispatch = {
+	type: string
+	payload: State
+}
+
+type Action = {
+	cardClick: 'cardClick'
+}
+
+export { EmojisArr, State, Dispatch, Action }

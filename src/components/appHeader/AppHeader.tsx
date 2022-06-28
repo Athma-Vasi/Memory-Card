@@ -1,7 +1,16 @@
 import Container from '../styled-generics/Container'
 import { Header } from '../styled-generics/Header'
+import { Action, Dispatch, State } from '../../types'
 
-export default function AppHeader() {
+export default function AppHeader({
+	state,
+	dispatch,
+	action,
+}: {
+	state: State
+	dispatch: React.Dispatch<Dispatch>
+	action: Action
+}): JSX.Element {
 	return (
 		<>
 			<Header>
