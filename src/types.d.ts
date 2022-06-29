@@ -69,7 +69,7 @@ type EmojisArr = {
 
 type State = {
 	// subsetEmojis: EmojisArr
-	allEmojis: EmojisArr
+	allEmojis: EmojisArr | undefined
 	clickedEmojis: Set<string>
 	score: number
 	highScore: number

@@ -1,6 +1,6 @@
 import { EmojisArr, State } from './types'
 
-function randomSliceOfEmojis(emojisArr: EmojisArr, level_ = 1): EmojisArr {
+function randomSliceOfEmojis(emojisArr: EmojisArr, level_ = 1): EmojisArr | undefined {
 	let clone = structuredClone(emojisArr)
 
 	if (!localStorage.getItem('uniqueRandomIndexes')) {
@@ -16,7 +16,7 @@ function randomSliceOfEmojis(emojisArr: EmojisArr, level_ = 1): EmojisArr {
 	while (!isValidIndex) {
 		const randomIndex = Math.floor(Math.random() * clone.length)
 		let isUnique = false
-		let indexAmount = 10 * level_
+		let indexAmount = 5 * level_
 
 		if (randomIndex + indexAmount < clone.length) {
 			// let randomIndexArr = [
@@ -38,6 +38,8 @@ function randomSliceOfEmojis(emojisArr: EmojisArr, level_ = 1): EmojisArr {
 				randomIndexArr.push(i)
 			}
 
+			console.log(randomIndexArr)
+
 			randomIndexArr.forEach((randomIndex) => {
 				if (!uniqueRandomIndexes.includes(randomIndex)) {
 					isUnique = true
@@ -53,13 +55,13 @@ function randomSliceOfEmojis(emojisArr: EmojisArr, level_ = 1): EmojisArr {
 					uniqueRandomIndexes.push(randomIndex)
 					localStorage.setItem('uniqueRandomIndexes', JSON.stringify(uniqueRandomIndexes))
 				})
-				clone = clone.slice(randomIndex, randomIndex + 10)
+				clone = clone.slice(randomIndex, randomIndex + indexAmount)
+				return clone
 			}
 		} else {
 			isValidIndex = false
 		}
 	}
-	return clone
 }
 
 export { randomSliceOfEmojis }

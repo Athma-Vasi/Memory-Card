@@ -19,61 +19,90 @@ function GameBoard({
 }): JSX.Element {
 	// const [subsetEmojis, setSubsetEmojis] = useState<EmojisArr>(state.subsetEmojis)
 	const [allEmojis, setAllEmojis] = useState(state.allEmojis)
-	const [clickedEmojis, setClickedEmojis] = useState<Set<string>>(new Set())
-	const [score, setScore] = useState(0)
+	const [clickedEmojis, setClickedEmojis] = useState<Set<string>>(state.clickedEmojis)
+	const [score, setScore] = useState(state.score)
 	const [highScore, setHighScore] = useState(state.highScore)
-	const [level, setLevel] = useState(1)
+	const [level, setLevel] = useState(state.level)
 
-	if (clickedEmojis.size === 10) {
-		increaseGameLevel(clickedEmojis, allEmojis, level)
-	}
+	function increaseGameLevel(emojisData_: EmojisArr, level_: number): void {
+		const newAllEmojis = randomSliceOfEmojis(emojisData_, level_)
 
-	function increaseGameLevel(
-		clickedEmojis_: Set<string>,
-		allEmojis_: EmojisArr,
-		level_: number
-	) {
-		let newAllEmojis: EmojisArr = []
-		setLevel(level + 1)
-		newAllEmojis = randomSliceOfEmojis(allEmojis_, level_)
+		if (newAllEmojis) {
+			setAllEmojis(newAllEmojis)
 
-		setAllEmojis(newAllEmojis)
-
-		dispatch({
-			type: action.cardClick,
-			payload: {
-				allEmojis: newAllEmojis,
-				clickedEmojis: new Set(),
-				score: 0,
-				level: level,
-				highScore: highScore,
-			},
-		})
+			dispatch({
+				type: action.cardClick,
+				payload: {
+					allEmojis: newAllEmojis,
+					clickedEmojis: new Set(),
+					score: score,
+					level: level_,
+					highScore: highScore,
+				},
+			})
+		}
 	}
 
 	function handleCardClick(ev: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
-		const emoji = ev.currentTarget.dataset.emoji ?? ''
-
-		const shuffledArray = (function (array: EmojisArr): EmojisArr {
-			let clone = structuredClone(array)
-
-			clone.sort(() => Math.random() - 0.5)
-			return clone
-		})(allEmojis)
-
-		setAllEmojis(shuffledArray)
-		console.log(allEmojis)
-
-		if (!clickedEmojis.has(emoji)) {
-			setClickedEmojis(clickedEmojis.add(emoji))
-
+		if (clickedEmojis.size === 4) {
+			setLevel(level + 1)
 			setScore(score + 1)
-		} else {
-			storeHighScore(score)
-			setScore(0)
 			setClickedEmojis(new Set())
-			//game over function
-			console.warn('game over')
+			increaseGameLevel(emojisData, level)
+			console.log({ level })
+		} else {
+			const shuffledArray = (function (arr: EmojisArr | undefined): EmojisArr {
+				let clone = structuredClone(arr)
+
+				for (let i = clone.length - 1; i > 0; i -= 1) {
+					const j = Math.floor(Math.random() * (i + 1))
+					;[clone[i], clone[j]] = [clone[j], clone[i]]
+				}
+
+				return clone
+			})(allEmojis)
+
+			setAllEmojis(shuffledArray)
+
+			const emoji = ev.currentTarget.dataset.emoji ?? ''
+
+			if (!clickedEmojis.has(emoji)) {
+				setClickedEmojis(clickedEmojis.add(emoji))
+
+				setScore(score + 1)
+
+				dispatch({
+					type: action.cardClick,
+					payload: {
+						allEmojis: allEmojis,
+						clickedEmojis: clickedEmojis,
+						score: score,
+						level: level,
+						highScore: highScore,
+					},
+				})
+			} else {
+				storeHighScore(score)
+				setScore(0)
+				setClickedEmojis(new Set())
+				const newAllEmojis = randomSliceOfEmojis(emojisData)
+				if (newAllEmojis) setAllEmojis(newAllEmojis)
+
+				dispatch({
+					type: action.cardClick,
+					payload: {
+						allEmojis: allEmojis,
+						clickedEmojis: clickedEmojis,
+						score: score,
+						level: level,
+						highScore: highScore,
+					},
+				})
+
+				localStorage.setItem('uniqueRandomIndexes', JSON.stringify([]))
+				//game over function
+				console.warn('game over')
+			}
 		}
 		console.log(clickedEmojis)
 	}
@@ -84,8 +113,6 @@ function GameBoard({
 		}
 
 		const storageHighScore: number = JSON.parse(localStorage.getItem('highScore') ?? '0')
-
-		console.log({ storageHighScore })
 
 		if (score_ > storageHighScore) {
 			setHighScore(score_)
@@ -99,11 +126,11 @@ function GameBoard({
 	return (
 		<>
 			<Container>
-				{allEmojis.map((emoji, index) => (
+				{allEmojis?.map((emoji, index) => (
 					<div className="emojis" key={index}>
 						<Card onClick={handleCardClick} data-emoji={emoji.character}>
 							<p style={{ transform: 'scale(4)' }}>{emoji.character}</p>
-							<p>{emoji.unicodeName.replace(/(E)/, ' ')}</p>
+							<p>{emoji.unicodeName}</p>
 						</Card>
 					</div>
 				))}

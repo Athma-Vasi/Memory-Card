@@ -13,8 +13,8 @@ function ScoreBoard({
 	return (
 		<>
 			<Header>
-				<h3>Score: </h3>
-				<h3>Highscore: </h3>
+				<h3>Score: {state.score}</h3>
+				<h3>Highscore: {state.highScore}</h3>
 			</Header>
 		</>
 	)
