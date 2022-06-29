@@ -23,7 +23,6 @@ function ScoreBoard({
 		})
 	}
 
-	console.log(state.isHardMode)
 	return (
 		<>
 			<Header

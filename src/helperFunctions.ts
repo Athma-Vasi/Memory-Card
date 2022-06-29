@@ -1,4 +1,4 @@
-import { EmojisArr, State } from './types'
+import { EmojisArr, State, Dispatch } from './types'
 
 function randomSliceOfEmojis(emojisArr: EmojisArr, level_ = 1): EmojisArr | undefined {
 	let clone = structuredClone(emojisArr)
@@ -19,19 +19,6 @@ function randomSliceOfEmojis(emojisArr: EmojisArr, level_ = 1): EmojisArr | unde
 		let indexAmount = 6 * level_
 
 		if (randomIndex + indexAmount < clone.length) {
-			// let randomIndexArr = [
-			// 	randomIndex,
-			// 	randomIndex + 1,
-			// 	randomIndex + 2,
-			// 	randomIndex + 3,
-			// 	randomIndex + 4,
-			// 	randomIndex + 5,
-			// 	randomIndex + 6,
-			// 	randomIndex + 7,
-			// 	randomIndex + 8,
-			// 	randomIndex + 9,
-			// ]
-
 			let randomIndexArr: number[] = []
 
 			for (let i = randomIndex; i < randomIndex + indexAmount; i += 1) {
@@ -64,4 +51,58 @@ function randomSliceOfEmojis(emojisArr: EmojisArr, level_ = 1): EmojisArr | unde
 	}
 }
 
-export { randomSliceOfEmojis }
+const reducer = (state: State, action: Dispatch): State => {
+	const clone = structuredClone(state)
+
+	switch (action.type) {
+		case 'cardClick': {
+			//updates everything because the dispatch function has multiple payloads sometimes
+			clone.allEmojis = action.payload.allEmojis
+			clone.clickedEmojis = action.payload.clickedEmojis
+			clone.score = action.payload.score
+			clone.level = action.payload.level
+			clone.highScore = action.payload.highScore
+
+			return clone
+		}
+		//updates each case individually
+		case 'updateAllEmojis': {
+			clone.allEmojis = action.payload.allEmojis
+			return clone
+		}
+		case 'updateClickedEmojis': {
+			clone.clickedEmojis = action.payload.clickedEmojis
+			return clone
+		}
+		case 'updateScore': {
+			clone.score = action.payload.score
+			return clone
+		}
+		case 'updateLevel': {
+			clone.level = action.payload.level
+			return clone
+		}
+		case 'updateHighScore': {
+			clone.highScore = action.payload.highScore
+			return clone
+		}
+		case 'toggleIsGameRunning': {
+			clone.isGameRunning = action.payload.isGameRunning
+			return clone
+		}
+		case 'toggleTheme': {
+			clone.isDarkMode = action.payload.isDarkMode
+			return clone
+		}
+		case 'toggleHardMode': {
+			clone.isHardMode = action.payload.isHardMode
+			return clone
+		}
+
+		default: {
+			return clone
+		}
+	}
+}
+
+export { randomSliceOfEmojis, reducer }

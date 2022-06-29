@@ -1,4 +1,3 @@
-import Container from '../styled-generics/Container'
 import Button from '../styled-generics/Button'
 import { Header } from '../styled-generics/Header'
 import { Action, Dispatch, State } from '../../types'
@@ -22,6 +21,7 @@ export default function AppHeader({
 			},
 		})
 	}
+
 	return (
 		<>
 			<Header>

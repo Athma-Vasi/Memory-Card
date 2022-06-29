@@ -19,6 +19,8 @@ function GameBoard({
 	action: Action
 }): JSX.Element {
 	function handleCardClick(ev: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
+		console.log({ state })
+
 		const amountOfCards = state.level * 6
 
 		//if size of the emojis set is one less than amount of cards displayed,
@@ -130,6 +132,13 @@ function GameBoard({
 	function handlePlayAgainBttnClick(
 		ev: React.MouseEvent<HTMLButtonElement, MouseEvent>
 	): void {
+		dispatch({
+			type: action.updateHighScore,
+			payload: {
+				highScore: JSON.parse(localStorage.getItem('highScore') ?? '0'),
+			},
+		})
+
 		dispatch({
 			type: action.toggleIsGameRunning,
 			payload: {

@@ -5,8 +5,8 @@ import AppHeader from './components/appHeader'
 import ScoreBoard from './components/scoreBoard'
 import GameBoard from './components/gameBoard'
 
-import { ThemeState, State, Dispatch, Action } from './types'
-import { randomSliceOfEmojis } from './helperFunctions'
+import { ThemeState, State, Action } from './types'
+import { randomSliceOfEmojis, reducer } from './helperFunctions'
 
 import { emojisData } from './emojisData'
 import { useReducer } from 'react'
@@ -44,60 +44,6 @@ const action: Action = {
 	toggleIsGameRunning: 'toggleIsGameRunning',
 	toggleTheme: 'toggleTheme',
 	toggleHardMode: 'toggleHardMode',
-}
-
-const reducer = (state: State, action: Dispatch): State => {
-	const clone = structuredClone(state)
-
-	switch (action.type) {
-		case 'cardClick': {
-			//updates everything because the dispatch function has multiple payloads sometimes
-			clone.allEmojis = action.payload.allEmojis
-			clone.clickedEmojis = action.payload.clickedEmojis
-			clone.score = action.payload.score
-			clone.level = action.payload.level
-			clone.highScore = action.payload.highScore
-
-			return clone
-		}
-		//updates each case individually
-		case 'updateAllEmojis': {
-			clone.allEmojis = action.payload.allEmojis
-			return clone
-		}
-		case 'updateClickedEmojis': {
-			clone.clickedEmojis = action.payload.clickedEmojis
-			return clone
-		}
-		case 'updateScore': {
-			clone.score = action.payload.score
-			return clone
-		}
-		case 'updateLevel': {
-			clone.level = action.payload.level
-			return clone
-		}
-		case 'updateHighScore': {
-			clone.highScore = action.payload.highScore
-			return clone
-		}
-		case 'toggleIsGameRunning': {
-			clone.isGameRunning = action.payload.isGameRunning
-			return clone
-		}
-		case 'toggleTheme': {
-			clone.isDarkMode = action.payload.isDarkMode
-			return clone
-		}
-		case 'toggleHardMode': {
-			clone.isHardMode = action.payload.isHardMode
-			return clone
-		}
-
-		default: {
-			return clone
-		}
-	}
 }
 
 function App() {
