@@ -1,5 +1,6 @@
 import Container from '../styled-generics/Container'
 import Card from '../styled-generics/Card'
+import Wrapper from '../styled-generics/Wrapper'
 
 import { emojisData } from '../../emojisData'
 
@@ -18,7 +19,7 @@ function GameBoard({
 	action: Action
 }): JSX.Element {
 	function handleCardClick(ev: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
-		const amountOfCards = state.level * 4
+		const amountOfCards = state.level * 6
 
 		//if size of the emojis set is one less than amount of cards displayed,
 		//then increase the level
@@ -139,9 +140,18 @@ function GameBoard({
 
 	return (
 		<>
-			<Container>
+			<Container
+				colour={
+					state.isDarkMode ? state.themeState.colour.dark : state.themeState.colour.light
+				}
+				backgroundColour={
+					state.isDarkMode
+						? state.themeState.backgroundColour.dark
+						: state.themeState.backgroundColour.light
+				}
+			>
 				{!state.isGameRunning && (
-					<Button
+					<Wrapper
 						colour={
 							state.isDarkMode
 								? state.themeState.colour.dark
@@ -152,10 +162,24 @@ function GameBoard({
 								? state.themeState.backgroundColour.dark
 								: state.themeState.backgroundColour.light
 						}
-						onClick={handlePlayAgainBttnClick}
 					>
-						Play again!
-					</Button>
+						<h5>Wow! That's a great score! Try to beat your best!</h5>
+						<Button
+							colour={
+								state.isDarkMode
+									? state.themeState.colour.dark
+									: state.themeState.colour.light
+							}
+							backgroundColour={
+								state.isDarkMode
+									? state.themeState.backgroundColour.dark
+									: state.themeState.backgroundColour.light
+							}
+							onClick={handlePlayAgainBttnClick}
+						>
+							Play again!
+						</Button>
+					</Wrapper>
 				)}
 				{state.isGameRunning &&
 					state.allEmojis?.map((emoji, index) => (
@@ -175,7 +199,7 @@ function GameBoard({
 								data-emoji={emoji.character}
 							>
 								<p style={{ transform: 'scale(4)' }}>{emoji.character}</p>
-								<p>{emoji.unicodeName}</p>
+								{!state.isHardMode && <p>{emoji.unicodeName}</p>}
 							</Card>
 						</div>
 					))}

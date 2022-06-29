@@ -76,6 +76,7 @@ type State = {
 	level: number
 	isGameRunning?: boolean
 	isDarkMode?: boolean
+	isHardMode?: boolean
 	themeState: ThemeState
 }
 
@@ -104,6 +105,7 @@ type Action = {
 	updateHighScore: 'updateHighScore'
 	toggleIsGameRunning: 'toggleIsGameRunning'
 	toggleTheme: 'toggleTheme'
+	toggleHardMode: 'toggleHardMode'
 }
 
 export { EmojisArr, State, Dispatch, Action, ThemeState }

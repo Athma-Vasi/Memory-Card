@@ -13,13 +13,27 @@ const Wrapper = styled.div<WrapperProps>`
 	background-color: ${({ backgroundColour }) =>
 		backgroundColour ? backgroundColour : 'white'};
 
-	width: clamp(16rem, 90vw, 70rem);
+	// width: clamp(16rem, 90vw, 70rem);
+	// min-width: 100ch;
+	// width: 90vw;
+	// max-width: 70rem;
 
-	padding: 1.5rem clamp(1rem, 5%, 3rem);
+	// width: calc(100% - 2rem);
+	// height: 100vh;
+
+	@media only screen and (max-width: 600px) {
+		width: calc(100% - 2rem);
+	}
+
+	@media only screen and (max-width: 960px) {
+		width: 93ch;
+	}
+
+	@media only screen and (min-width: 1200px) {
+		width: 190ch;
+	}
 
 	transition: 146ms all ease-in-out;
-
-	outline: 1px solid tan;
 `
 
 export default Wrapper

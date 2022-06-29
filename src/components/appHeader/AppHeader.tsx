@@ -25,8 +25,21 @@ export default function AppHeader({
 	return (
 		<>
 			<Header>
-				<h1>Emoji Card</h1>
-				<Header>
+				<h1
+					style={{
+						width: 'clamp(15ch, 35ch, 60ch)',
+						fontSize: '4rem',
+					}}
+				>
+					Memoji Card
+				</h1>
+				<Header
+					style={{
+						justifyContent: 'space-around',
+						paddingLeft: '5rem',
+						paddingRight: '5rem',
+					}}
+				>
 					<a href="https://github.com/Athma-Vasi" className="link">
 						Made by Athma Vasi
 					</a>

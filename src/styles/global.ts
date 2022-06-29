@@ -18,8 +18,12 @@ body {
 	display: grid;
 	place-content: center;
   font-size: 1.6rem;
-  outline: 1px solid violet;
+  width: 100%;
+}
 
+a{
+  text-decoration: none;
+  color: inherit;
 }
 `
 

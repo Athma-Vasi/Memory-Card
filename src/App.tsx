@@ -30,6 +30,7 @@ const initialState: State = {
 	highScore: JSON.parse(localStorage.getItem('highScore') ?? '0'),
 	isGameRunning: true,
 	isDarkMode: false,
+	isHardMode: false,
 	themeState: themeState,
 }
 
@@ -42,6 +43,7 @@ const action: Action = {
 	updateHighScore: 'updateHighScore',
 	toggleIsGameRunning: 'toggleIsGameRunning',
 	toggleTheme: 'toggleTheme',
+	toggleHardMode: 'toggleHardMode',
 }
 
 const reducer = (state: State, action: Dispatch): State => {
@@ -85,6 +87,10 @@ const reducer = (state: State, action: Dispatch): State => {
 		}
 		case 'toggleTheme': {
 			clone.isDarkMode = action.payload.isDarkMode
+			return clone
+		}
+		case 'toggleHardMode': {
+			clone.isHardMode = action.payload.isHardMode
 			return clone
 		}
 

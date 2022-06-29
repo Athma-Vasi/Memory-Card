@@ -35,7 +35,8 @@ const Card = styled.div<CardProps>`
 		transform: scale(1.0382);
 	}
 
-	outline: 1px solid orange;
+	border: 1px solid ${({ colour }) => (colour ? colour : 'hsl(180, 100%, 25%)')};
+	border-radius: 4px;
 `
 
 export default Card

@@ -5,12 +5,10 @@ const Header = styled.header`
 	align-items: center;
 	justify-content: space-between;
 
-	padding-left: 1rem;
-	padding-right: 1rem;
+	padding-left: 2rem;
+	padding-right: 2rem;
 
 	width: 100%;
-
-	outline: 1px solid blue;
 `
 
 export { Header }
