@@ -16,6 +16,9 @@ const Card = styled.div<CardProps>`
 	align-items: center;
 	justify-content: space-evenly;
 
+	padding-left: 1rem;
+	padding-right: 1rem;
+
 	height: 19rem;
 
 	transition: 146ms all ease-in-out;
