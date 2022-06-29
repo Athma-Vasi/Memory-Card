@@ -2,7 +2,7 @@
 
 Memory card project as part of The Odin Project curriculum
 
-[Click here to view project live]()
+[Click here to view project live](https://athma-vasi.github.io/Memory-Card/)
 
 ## Things I learned
 
