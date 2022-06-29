@@ -66,11 +66,9 @@ export default function AppHeader({
 						outline: 'none',
 						minWidth: '2rem',
 						minHeight: '2rem',
-						marginTop: '5.5rem',
+						marginTop: '4.5rem',
 						marginLeft: '2rem',
-						// marginTop: '-1.5rem',
 						marginRight: '1rem',
-						// paddingTop: '1rem',
 					}}
 					type="button"
 					onClick={handleToggleThemeClick}
