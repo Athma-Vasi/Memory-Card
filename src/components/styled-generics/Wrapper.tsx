@@ -23,14 +23,17 @@ const Wrapper = styled.div<WrapperProps>`
 
 	@media only screen and (max-width: 600px) {
 		width: calc(100% - 2rem);
+		height: 100vh;
 	}
 
 	@media only screen and (max-width: 960px) {
 		width: 93ch;
+		height: 100vh;
 	}
 
 	@media only screen and (min-width: 1200px) {
 		width: 190ch;
+		height: 100vh;
 	}
 
 	transition: 146ms all ease-in-out;

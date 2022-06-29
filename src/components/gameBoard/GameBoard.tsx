@@ -163,7 +163,7 @@ function GameBoard({
 								: state.themeState.backgroundColour.light
 						}
 					>
-						<h5>Wow! That's a great score! Try to beat your best!</h5>
+						<h3>Wow! 🤩 That's a great score! Try to beat your best! ✺◟(＾∇＾)◞✺</h3>
 						<Button
 							colour={
 								state.isDarkMode
@@ -209,17 +209,3 @@ function GameBoard({
 }
 
 export default GameBoard
-
-// if (!localStorage.getItem('clickedCards')) {
-//   localStorage.setItem('clickedCards', JSON.stringify([]))
-// }
-
-// const clickedCards: string[] = JSON.parse(localStorage.getItem('clickedCards') ?? '')
-
-// if (!clickedCards.includes(emoji)) {
-//   clickedCards.push(emoji)
-//   localStorage.setItem('clickedCards', JSON.stringify(clickedCards))
-// } else {
-// }
-
-//const apiKey = 'cb0ed2596d9221e2efb489d3f9dc5b658732aa5a'

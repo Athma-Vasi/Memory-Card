@@ -43,7 +43,7 @@ export default function AppHeader({
 					<a href="https://github.com/Athma-Vasi" className="link">
 						Made by Athma Vasi
 					</a>
-					<a href="" className="link">
+					<a href="https://github.com/Athma-Vasi/Memory-Card" className="link">
 						View code
 					</a>
 				</Header>
