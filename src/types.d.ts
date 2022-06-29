@@ -80,11 +80,18 @@ type State = {
 
 type Dispatch = {
 	type: string
-	payload: State
+	payload: Partial<State>
 }
 
 type Action = {
 	cardClick: 'cardClick'
+	updateAllEmojis: 'updateAllEmojis'
+	updateClickedEmojis: 'updateClickedEmojis'
+	updateScore: 'updateScore'
+	updateLevel: 'updateLevel'
+	updateHighScore: 'updateHighScore'
+	toggleIsGameRunning: 'toggleIsGameRunning'
+	toggleIsDarkMode: 'toggleIsDarkMode'
 }
 
 export { EmojisArr, State, Dispatch, Action }

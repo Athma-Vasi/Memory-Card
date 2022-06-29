@@ -14,9 +14,9 @@ const Card = styled.div<CardProps>`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-evenly;
 
-	height: 15rem;
+	height: 19rem;
 
 	transition: 146ms all ease-in-out;
 

@@ -12,7 +12,6 @@ import { emojisData } from './emojisData'
 import { useReducer } from 'react'
 
 const initialState: State = {
-	// subsetEmojis: randomSliceOfEmojis(emojisData),
 	allEmojis: randomSliceOfEmojis(emojisData),
 	clickedEmojis: new Set(),
 	score: 0,
@@ -24,6 +23,13 @@ const initialState: State = {
 
 const action: Action = {
 	cardClick: 'cardClick',
+	updateAllEmojis: 'updateAllEmojis',
+	updateClickedEmojis: 'updateClickedEmojis',
+	updateScore: 'updateScore',
+	updateLevel: 'updateLevel',
+	updateHighScore: 'updateHighScore',
+	toggleIsGameRunning: 'toggleIsGameRunning',
+	toggleIsDarkMode: 'toggleIsDarkMode',
 }
 
 const reducer = (state: State, action: Dispatch): State => {
@@ -31,13 +37,42 @@ const reducer = (state: State, action: Dispatch): State => {
 
 	switch (action.type) {
 		case 'cardClick': {
-			// clone.subsetEmojis = action.payload.subsetEmojis
+			//updates everything because the dispatch function has multiple payloads sometimes
 			clone.allEmojis = action.payload.allEmojis
 			clone.clickedEmojis = action.payload.clickedEmojis
 			clone.score = action.payload.score
 			clone.level = action.payload.level
 			clone.highScore = action.payload.highScore
 
+			return clone
+		}
+		//updates each case individually
+		case 'updateAllEmojis': {
+			clone.allEmojis = action.payload.allEmojis
+			return clone
+		}
+		case 'updateClickedEmojis': {
+			clone.clickedEmojis = action.payload.clickedEmojis
+			return clone
+		}
+		case 'updateScore': {
+			clone.score = action.payload.score
+			return clone
+		}
+		case 'updateLevel': {
+			clone.level = action.payload.level
+			return clone
+		}
+		case 'updateHighScore': {
+			clone.highScore = action.payload.highScore
+			return clone
+		}
+		case 'toggleIsGameRunning': {
+			clone.isGameRunning = action.payload.isGameRunning
+			return clone
+		}
+		case 'toggleIsDarkMode': {
+			clone.isDarkMode = action.payload.isDarkMode
 			return clone
 		}
 

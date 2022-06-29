@@ -16,7 +16,7 @@ function randomSliceOfEmojis(emojisArr: EmojisArr, level_ = 1): EmojisArr | unde
 	while (!isValidIndex) {
 		const randomIndex = Math.floor(Math.random() * clone.length)
 		let isUnique = false
-		let indexAmount = 5 * level_
+		let indexAmount = 4 * level_
 
 		if (randomIndex + indexAmount < clone.length) {
 			// let randomIndexArr = [
