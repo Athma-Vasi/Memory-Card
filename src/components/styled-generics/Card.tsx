@@ -30,6 +30,9 @@ const Card = styled.div<CardProps>`
 
 	&:hover {
 		cursor: pointer;
+		box-shadow: 2px 4px 4px hsl(0, 0%, 0%, 0.4), 3px 6px 6px hsl(0, 0%, 0%, 0.3),
+			4px 8px 8px hsl(0, 0%, 0%, 0.2), 5px 10px 10px hsl(0, 0%, 0%, 0.1);
+		transform: scale(1.0382);
 	}
 
 	outline: 1px solid orange;
