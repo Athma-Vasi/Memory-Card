@@ -24,26 +24,32 @@ function GameBoard({
 	const [highScore, setHighScore] = useState(state.highScore)
 	const [level, setLevel] = useState(1)
 
-	// const increaseGameLevel = (function (clickedEmojis_: Set<string>) {
-	// 	if (clickedEmojis_.size === 10) {
-	// 		let newAllEmojis: EmojisArr = []
-	// 		setLevel(level + 1)
-	// 		newAllEmojis = randomSliceOfEmojis(allEmojis, level)
+	if (clickedEmojis.size === 10) {
+		increaseGameLevel(clickedEmojis, allEmojis, level)
+	}
 
-	// 		setAllEmojis(newAllEmojis)
+	function increaseGameLevel(
+		clickedEmojis_: Set<string>,
+		allEmojis_: EmojisArr,
+		level_: number
+	) {
+		let newAllEmojis: EmojisArr = []
+		setLevel(level + 1)
+		newAllEmojis = randomSliceOfEmojis(allEmojis_, level_)
 
-	// 		dispatch({
-	// 			type: action.cardClick,
-	// 			payload: {
-	// 				allEmojis: newAllEmojis,
-	// 				clickedEmojis: new Set(),
-	// 				score: 0,
-	// 				level: level,
-	// 				highScore: highScore,
-	// 			},
-	// 		})
-	// 	}
-	// })(clickedEmojis)
+		setAllEmojis(newAllEmojis)
+
+		dispatch({
+			type: action.cardClick,
+			payload: {
+				allEmojis: newAllEmojis,
+				clickedEmojis: new Set(),
+				score: 0,
+				level: level,
+				highScore: highScore,
+			},
+		})
+	}
 
 	function handleCardClick(ev: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
 		const emoji = ev.currentTarget.dataset.emoji ?? ''
