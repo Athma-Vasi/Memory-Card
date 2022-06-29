@@ -68,11 +68,12 @@ type EmojisArr = {
 }[]
 
 type State = {
-	subsetEmojis: EmojisArr
+	// subsetEmojis: EmojisArr
 	allEmojis: EmojisArr
 	clickedEmojis: Set<string>
 	score: number
 	highScore: number
+	level: number
 	isGameRunning?: boolean
 	isDarkMode?: boolean
 }

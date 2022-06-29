@@ -6,6 +6,7 @@ import { emojisData } from '../../emojisData'
 import { EmojisArr, State, Dispatch, Action } from '../../types'
 
 import { useState } from 'react'
+import { randomSliceOfEmojis } from '../../helperFunctions'
 
 function GameBoard({
 	state,
@@ -16,20 +17,33 @@ function GameBoard({
 	dispatch: React.Dispatch<Dispatch>
 	action: Action
 }): JSX.Element {
-	const [subsetEmojis, setSubsetEmojis] = useState<EmojisArr>(emojisData.slice(0, 10))
-	const [allEmojis, setAllEmojis] = useState(subsetEmojis)
+	// const [subsetEmojis, setSubsetEmojis] = useState<EmojisArr>(state.subsetEmojis)
+	const [allEmojis, setAllEmojis] = useState(state.allEmojis)
 	const [clickedEmojis, setClickedEmojis] = useState<Set<string>>(new Set())
 	const [score, setScore] = useState(0)
-	const [highScore, setHighScore] = useState(retrieveHighScore())
+	const [highScore, setHighScore] = useState(state.highScore)
+	const [level, setLevel] = useState(1)
 
-	const apiKey = 'cb0ed2596d9221e2efb489d3f9dc5b658732aa5a'
+	// const increaseGameLevel = (function (clickedEmojis_: Set<string>) {
+	// 	if (clickedEmojis_.size === 10) {
+	// 		let newAllEmojis: EmojisArr = []
+	// 		setLevel(level + 1)
+	// 		newAllEmojis = randomSliceOfEmojis(allEmojis, level)
 
-	// const apiEmojis = (async () => {
-	// 	const response = await fetch(`https://emoji-api.com/emojis?access_key=${apiKey}`)
-	// 	const data = await response.json()
+	// 		setAllEmojis(newAllEmojis)
 
-	// 	console.log(data)
-	// })()
+	// 		dispatch({
+	// 			type: action.cardClick,
+	// 			payload: {
+	// 				allEmojis: newAllEmojis,
+	// 				clickedEmojis: new Set(),
+	// 				score: 0,
+	// 				level: level,
+	// 				highScore: highScore,
+	// 			},
+	// 		})
+	// 	}
+	// })(clickedEmojis)
 
 	function handleCardClick(ev: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
 		const emoji = ev.currentTarget.dataset.emoji ?? ''
@@ -76,10 +90,6 @@ function GameBoard({
 	console.log({ score })
 	console.log({ highScore })
 
-	function retrieveHighScore(): number {
-		return JSON.parse(localStorage.getItem('highScore') ?? '0')
-	}
-
 	return (
 		<>
 			<Container>
@@ -109,3 +119,5 @@ export default GameBoard
 //   localStorage.setItem('clickedCards', JSON.stringify(clickedCards))
 // } else {
 // }
+
+//const apiKey = 'cb0ed2596d9221e2efb489d3f9dc5b658732aa5a'
