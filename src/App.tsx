@@ -5,11 +5,22 @@ import AppHeader from './components/appHeader'
 import ScoreBoard from './components/scoreBoard'
 import GameBoard from './components/gameBoard'
 
-import { EmojisArr, State, Dispatch, Action } from './types'
+import { ThemeState, State, Dispatch, Action } from './types'
 import { randomSliceOfEmojis } from './helperFunctions'
 
 import { emojisData } from './emojisData'
 import { useReducer } from 'react'
+
+const themeState: ThemeState = {
+	colour: {
+		light: 'hsl(0, 0%, 25%)',
+		dark: 'hsl(0, 0%, 75%)',
+	},
+	backgroundColour: {
+		light: 'hsl(0, 0%, 97%)',
+		dark: 'hsl(0, 0%, 11%)',
+	},
+}
 
 const initialState: State = {
 	allEmojis: randomSliceOfEmojis(emojisData),
@@ -19,6 +30,7 @@ const initialState: State = {
 	highScore: JSON.parse(localStorage.getItem('highScore') ?? '0'),
 	isGameRunning: true,
 	isDarkMode: false,
+	themeState: themeState,
 }
 
 const action: Action = {
@@ -29,7 +41,7 @@ const action: Action = {
 	updateLevel: 'updateLevel',
 	updateHighScore: 'updateHighScore',
 	toggleIsGameRunning: 'toggleIsGameRunning',
-	toggleIsDarkMode: 'toggleIsDarkMode',
+	toggleTheme: 'toggleTheme',
 }
 
 const reducer = (state: State, action: Dispatch): State => {
@@ -71,7 +83,7 @@ const reducer = (state: State, action: Dispatch): State => {
 			clone.isGameRunning = action.payload.isGameRunning
 			return clone
 		}
-		case 'toggleIsDarkMode': {
+		case 'toggleTheme': {
 			clone.isDarkMode = action.payload.isDarkMode
 			return clone
 		}
@@ -86,7 +98,16 @@ function App() {
 	const [state, dispatch] = useReducer(reducer, initialState)
 
 	return (
-		<Wrapper>
+		<Wrapper
+			colour={
+				state.isDarkMode ? state.themeState.colour.dark : state.themeState.colour.light
+			}
+			backgroundColour={
+				state.isDarkMode
+					? state.themeState.backgroundColour.dark
+					: state.themeState.backgroundColour.light
+			}
+		>
 			<AppHeader state={state} dispatch={dispatch} action={action}></AppHeader>
 			<ScoreBoard state={state} dispatch={dispatch} action={action}></ScoreBoard>
 			<GameBoard state={state} dispatch={dispatch} action={action}></GameBoard>

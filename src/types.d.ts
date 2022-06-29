@@ -76,6 +76,18 @@ type State = {
 	level: number
 	isGameRunning?: boolean
 	isDarkMode?: boolean
+	themeState: ThemeState
+}
+
+type ThemeState = {
+	colour: {
+		light: string
+		dark: string
+	}
+	backgroundColour: {
+		light: string
+		dark: string
+	}
 }
 
 type Dispatch = {
@@ -91,7 +103,7 @@ type Action = {
 	updateLevel: 'updateLevel'
 	updateHighScore: 'updateHighScore'
 	toggleIsGameRunning: 'toggleIsGameRunning'
-	toggleIsDarkMode: 'toggleIsDarkMode'
+	toggleTheme: 'toggleTheme'
 }
 
-export { EmojisArr, State, Dispatch, Action }
+export { EmojisArr, State, Dispatch, Action, ThemeState }

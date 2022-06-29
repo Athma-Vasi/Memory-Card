@@ -141,12 +141,39 @@ function GameBoard({
 		<>
 			<Container>
 				{!state.isGameRunning && (
-					<Button onClick={handlePlayAgainBttnClick}>Play again!</Button>
+					<Button
+						colour={
+							state.isDarkMode
+								? state.themeState.colour.dark
+								: state.themeState.colour.light
+						}
+						backgroundColour={
+							state.isDarkMode
+								? state.themeState.backgroundColour.dark
+								: state.themeState.backgroundColour.light
+						}
+						onClick={handlePlayAgainBttnClick}
+					>
+						Play again!
+					</Button>
 				)}
 				{state.isGameRunning &&
 					state.allEmojis?.map((emoji, index) => (
 						<div className="emojis" key={index}>
-							<Card onClick={handleCardClick} data-emoji={emoji.character}>
+							<Card
+								colour={
+									state.isDarkMode
+										? state.themeState.colour.dark
+										: state.themeState.colour.light
+								}
+								backgroundColour={
+									state.isDarkMode
+										? state.themeState.backgroundColour.dark
+										: state.themeState.backgroundColour.light
+								}
+								onClick={handleCardClick}
+								data-emoji={emoji.character}
+							>
 								<p style={{ transform: 'scale(4)' }}>{emoji.character}</p>
 								<p>{emoji.unicodeName}</p>
 							</Card>
