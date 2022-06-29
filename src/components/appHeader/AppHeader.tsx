@@ -34,32 +34,37 @@ export default function AppHeader({
 						View code
 					</a>
 				</Header>
+				<Button
+					colour={
+						state.isDarkMode
+							? state.themeState.colour.dark
+							: state.themeState.colour.light
+					}
+					backgroundColour={
+						state.isDarkMode
+							? state.themeState.backgroundColour.dark
+							: state.themeState.backgroundColour.light
+					}
+					style={{
+						clipPath: 'circle()',
+						// fontSize: '2rem',
+						transform: 'scale(2)',
+						border: 'none',
+						outline: 'none',
+						minWidth: '2rem',
+						minHeight: '2rem',
+						marginTop: '5.5rem',
+						marginLeft: '2rem',
+						// marginTop: '-1.5rem',
+						marginRight: '1rem',
+						// paddingTop: '1rem',
+					}}
+					type="button"
+					onClick={handleToggleThemeClick}
+				>
+					☀️
+				</Button>
 			</Header>
-			<Button
-				colour={
-					state.isDarkMode ? state.themeState.colour.dark : state.themeState.colour.light
-				}
-				backgroundColour={
-					state.isDarkMode
-						? state.themeState.backgroundColour.dark
-						: state.themeState.backgroundColour.light
-				}
-				style={{
-					clipPath: 'circle()',
-					fontSize: '2rem',
-					border: 'none',
-					outline: 'none',
-					minWidth: '2rem',
-					minHeight: '2rem',
-					marginTop: '-1.5rem',
-					marginRight: '1rem',
-					paddingTop: '1rem',
-				}}
-				type="button"
-				onClick={handleToggleThemeClick}
-			>
-				☀️
-			</Button>
 			<Header>
 				<h3>Click on a card and don't click on any more than once!</h3>
 			</Header>
