@@ -23,60 +23,6 @@ function randomSliceOfEmojis(emojisArr: EmojisArr, level_ = 1): EmojisArr | unde
 	}
 
 	return shuffledArray.slice(0, level_ * 6)
-
-	/*
-	
-	//if not present, create new storage key
-	if (!localStorage.getItem('uniqueRandomIndexes')) {
-		localStorage.setItem('uniqueRandomIndexes', JSON.stringify([]))
-	}
-
-	const uniqueRandomIndexes: number[] = JSON.parse(
-		localStorage.getItem('uniqueRandomIndexes') ?? ''
-	)
-
-	//while isValidIndex is false, keeps generating random indexes and checks that
-	//randomIndex plus indexAmount is less than the length of the emojis array
-	//and checks that the randomIndex is not present in the uniqueRandomIndexes array
-	//each indexAmount is six times the current level
-	//will create a slice of unique emojis upon each invokation
-	let isValidIndex = false
-	
-	while (!isValidIndex) {
-		const randomIndex = Math.floor(Math.random() * clone.length)
-		let isUnique = false
-		let indexAmount = 6 * level_
-
-		if (randomIndex + indexAmount < clone.length) {
-			let randomIndexArr: number[] = []
-
-			for (let i = randomIndex; i < randomIndex + indexAmount; i += 1) {
-				randomIndexArr.push(i)
-			}
-
-			randomIndexArr.forEach((randomIndex) => {
-				if (!uniqueRandomIndexes.includes(randomIndex)) {
-					isUnique = true
-				} else {
-					isUnique = false
-					isValidIndex = false
-				}
-			})
-
-			if (isUnique) {
-				isValidIndex = true
-				randomIndexArr.forEach((randomIndex) => {
-					uniqueRandomIndexes.push(randomIndex)
-					localStorage.setItem('uniqueRandomIndexes', JSON.stringify(uniqueRandomIndexes))
-				})
-				clone = clone.slice(randomIndex, randomIndex + indexAmount)
-				return clone
-			}
-		} else {
-			isValidIndex = false
-		}
-	}
-	*/
 }
 
 const reducer = (state: State, action: Dispatch): State => {
