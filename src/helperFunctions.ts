@@ -1,16 +1,24 @@
 import { EmojisArr, State, Dispatch } from './types'
 
 function randomSliceOfEmojis(emojisArr: EmojisArr, level_ = 1): EmojisArr | undefined {
+	//deep copy of the emojis array
 	let clone = structuredClone(emojisArr)
 
+	//if not present, create new storage key
 	if (!localStorage.getItem('uniqueRandomIndexes')) {
 		localStorage.setItem('uniqueRandomIndexes', JSON.stringify([]))
 	}
 
+	//get the unique random indexes
 	const uniqueRandomIndexes = JSON.parse(
 		localStorage.getItem('uniqueRandomIndexes') ?? ''
 	)
 
+	//while isValidIndex is false, keeps generating random indexes and checks that
+	//randomIndex plus indexAmount is less than the length of the emojis array
+	//and checks that the randomIndex is not present in the uniqueRandomIndexes array
+	//each indexAmount is six times the current level
+	//will create a slice of unique emojis upon each invokation
 	let isValidIndex = false
 
 	while (!isValidIndex) {
@@ -24,8 +32,6 @@ function randomSliceOfEmojis(emojisArr: EmojisArr, level_ = 1): EmojisArr | unde
 			for (let i = randomIndex; i < randomIndex + indexAmount; i += 1) {
 				randomIndexArr.push(i)
 			}
-
-			console.log(randomIndexArr)
 
 			randomIndexArr.forEach((randomIndex) => {
 				if (!uniqueRandomIndexes.includes(randomIndex)) {
@@ -66,6 +72,7 @@ const reducer = (state: State, action: Dispatch): State => {
 			return clone
 		}
 		//updates each case individually
+		//some are unnecessary but are included for completeness
 		case 'updateAllEmojis': {
 			clone.allEmojis = action.payload.allEmojis
 			return clone
