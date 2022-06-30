@@ -92,8 +92,6 @@ function GameBoard({
 					},
 				})
 
-				localStorage.setItem('uniqueRandomIndexes', JSON.stringify([]))
-
 				dispatch({
 					type: action.toggleIsGameRunning,
 					payload: {

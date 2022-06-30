@@ -49,10 +49,6 @@ const action: Action = {
 function App() {
 	const [state, dispatch] = useReducer(reducer, initialState)
 
-	window.onbeforeunload = function () {
-		localStorage.setItem('uniqueRandomIndexes', JSON.stringify([]))
-	}
-
 	return (
 		<Wrapper
 			colour={
