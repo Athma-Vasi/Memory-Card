@@ -19,15 +19,11 @@ function GameBoard({
 	action: Action
 }): JSX.Element {
 	function handleCardClick(ev: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
-		console.log({ state })
-
 		const amountOfCards = state.level * 6
 
 		//if size of the emojis set is one less than amount of cards displayed,
 		//then increase the level
 		if (state.clickedEmojis.size === amountOfCards - 1) {
-			console.log('dispatching')
-
 			//first updating everything except allEmojis because its value is set to the
 			//return value of the randomSliceOfEmojis function which takes updated level
 			dispatch({
@@ -97,8 +93,6 @@ function GameBoard({
 				})
 
 				localStorage.setItem('uniqueRandomIndexes', JSON.stringify([]))
-				//game over function
-				console.warn('game over')
 
 				dispatch({
 					type: action.toggleIsGameRunning,
@@ -208,7 +202,13 @@ function GameBoard({
 								data-emoji={emoji.character}
 							>
 								<p style={{ transform: 'scale(4)' }}>{emoji.character}</p>
-								{!state.isHardMode && <p>{emoji.unicodeName}</p>}
+								{!state.isHardMode && (
+									<p>
+										{emoji.unicodeName.split(' ')[0].includes('E')
+											? emoji.unicodeName.split(' ').slice(1).join(' ')
+											: emoji.unicodeName}
+									</p>
+								)}
 							</Card>
 						</div>
 					))}

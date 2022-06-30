@@ -2,15 +2,36 @@ import { EmojisArr, State, Dispatch } from './types'
 
 function randomSliceOfEmojis(emojisArr: EmojisArr, level_ = 1): EmojisArr | undefined {
 	//deep copy of the emojis array
-	let clone = structuredClone(emojisArr)
+	let clone: EmojisArr = structuredClone(emojisArr)
 
+	const shuffledArray = (function (arr: EmojisArr): EmojisArr {
+		for (let i = arr.length - 1; i > 0; i -= 1) {
+			const j = Math.floor(Math.random() * (i + 1))
+			;[arr[i], arr[j]] = [arr[j], arr[i]]
+		}
+
+		return arr
+	})(clone)
+
+	if (level_ * 6 >= clone.length) {
+		alert(`😮😧😰😨😱😲😯😦😕😥😫🙁😟😞😔
+		You are a savant! You have reached the end of the game. 
+		`)
+
+		window.location.reload()
+		return undefined
+	}
+
+	return shuffledArray.slice(0, level_ * 6)
+
+	/*
+	
 	//if not present, create new storage key
 	if (!localStorage.getItem('uniqueRandomIndexes')) {
 		localStorage.setItem('uniqueRandomIndexes', JSON.stringify([]))
 	}
 
-	//get the unique random indexes
-	const uniqueRandomIndexes = JSON.parse(
+	const uniqueRandomIndexes: number[] = JSON.parse(
 		localStorage.getItem('uniqueRandomIndexes') ?? ''
 	)
 
@@ -20,7 +41,7 @@ function randomSliceOfEmojis(emojisArr: EmojisArr, level_ = 1): EmojisArr | unde
 	//each indexAmount is six times the current level
 	//will create a slice of unique emojis upon each invokation
 	let isValidIndex = false
-
+	
 	while (!isValidIndex) {
 		const randomIndex = Math.floor(Math.random() * clone.length)
 		let isUnique = false
@@ -55,9 +76,11 @@ function randomSliceOfEmojis(emojisArr: EmojisArr, level_ = 1): EmojisArr | unde
 			isValidIndex = false
 		}
 	}
+	*/
 }
 
 const reducer = (state: State, action: Dispatch): State => {
+	//deep copy of state
 	const clone = structuredClone(state)
 
 	switch (action.type) {
@@ -72,7 +95,7 @@ const reducer = (state: State, action: Dispatch): State => {
 			return clone
 		}
 		//updates each case individually
-		//some are unnecessary but are included for completeness
+		//some are unnecessary but are included for completeness and to ease future refactors
 		case 'updateAllEmojis': {
 			clone.allEmojis = action.payload.allEmojis
 			return clone
