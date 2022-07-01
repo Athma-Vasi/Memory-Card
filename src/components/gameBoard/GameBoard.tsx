@@ -34,6 +34,10 @@ function GameBoard({
 					score: (state.score += 1),
 					level: (state.level += 1),
 					highScore: state.highScore,
+					isGameRunning: true,
+					isDarkMode: state.isDarkMode,
+					isHardMode: state.isHardMode,
+					themeState: state.themeState,
 				},
 			})
 
@@ -71,6 +75,10 @@ function GameBoard({
 						score: (state.score += 1),
 						level: state.level,
 						highScore: state.highScore,
+						isGameRunning: true,
+						isDarkMode: state.isDarkMode,
+						isHardMode: state.isHardMode,
+						themeState: state.themeState,
 					},
 				})
 			}
@@ -89,6 +97,10 @@ function GameBoard({
 						score: (state.score = 0),
 						level: state.level,
 						highScore: state.highScore,
+						isGameRunning: true,
+						isDarkMode: state.isDarkMode,
+						isHardMode: state.isHardMode,
+						themeState: state.themeState,
 					},
 				})
 
@@ -125,16 +137,17 @@ function GameBoard({
 		ev: React.MouseEvent<HTMLButtonElement, MouseEvent>
 	): void {
 		dispatch({
-			type: action.updateHighScore,
+			type: action.cardClick,
 			payload: {
+				allEmojis: randomSliceOfEmojis(emojisData),
+				clickedEmojis: new Set(),
+				score: 0,
+				level: 1,
 				highScore: JSON.parse(localStorage.getItem('highScore') ?? '0'),
-			},
-		})
-
-		dispatch({
-			type: action.toggleIsGameRunning,
-			payload: {
 				isGameRunning: true,
+				isDarkMode: state.isDarkMode,
+				isHardMode: state.isHardMode,
+				themeState: state.themeState,
 			},
 		})
 	}

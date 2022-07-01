@@ -37,6 +37,9 @@ const reducer = (state: State, action: Dispatch): State => {
 			clone.score = action.payload.score
 			clone.level = action.payload.level
 			clone.highScore = action.payload.highScore
+			clone.isGameRunning = action.payload.isGameRunning
+			clone.isDarkMode = action.payload.isDarkMode
+			clone.themeState = action.payload.themeState
 
 			return clone
 		}
