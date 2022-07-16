@@ -60,7 +60,6 @@ export default function AppHeader({
 					}
 					style={{
 						clipPath: 'circle()',
-						// fontSize: '2rem',
 						transform: 'scale(2)',
 						border: 'none',
 						outline: 'none',
@@ -71,6 +70,7 @@ export default function AppHeader({
 						marginRight: '1rem',
 					}}
 					type="button"
+					data-cy="bttn-toggleTheme"
 					onClick={handleToggleThemeClick}
 				>
 					☀️

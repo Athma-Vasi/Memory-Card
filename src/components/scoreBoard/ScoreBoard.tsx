@@ -32,8 +32,8 @@ function ScoreBoard({
 					paddingRight: '5rem',
 				}}
 			>
-				<h3>Highscore: {state.highScore}</h3>
-				<h3>Score: {state.score}</h3>
+				<h3 data-cy="highscore">Highscore: {state.highScore}</h3>
+				<h3 data-cy="score">Score: {state.score}</h3>
 				<Button
 					colour={
 						state.isDarkMode
@@ -46,6 +46,7 @@ function ScoreBoard({
 							: state.themeState.backgroundColour.light
 					}
 					onClick={handleDifficultyClick}
+					data-cy="bttn-hardMode"
 				>
 					Hard mode
 				</Button>

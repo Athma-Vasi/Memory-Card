@@ -8,6 +8,16 @@ type EmojisArr = {
 	variants?: { slug: string; character: string }[]
 }[]
 
+type Emoji = {
+	slug: string
+	character: string
+	unicodeName: string
+	codePoint: string
+	group: string
+	subGroup: string
+	variants?: { slug: string; character: string }[]
+}
+
 type State = {
 	// subsetEmojis: EmojisArr
 	allEmojis: EmojisArr | undefined
@@ -49,4 +59,4 @@ type Action = {
 	toggleHardMode: 'toggleHardMode'
 }
 
-export { EmojisArr, State, Dispatch, Action, ThemeState }
+export { Emoji, EmojisArr, State, Dispatch, Action, ThemeState }

@@ -4,7 +4,7 @@ import Wrapper from '../styled-generics/Wrapper'
 
 import { emojisData } from '../../emojisData'
 
-import { EmojisArr, State, Dispatch, Action } from '../../types'
+import { EmojisArr, State, Dispatch, Action, Emoji } from '../../types'
 
 import { randomSliceOfEmojis } from '../../helperFunctions'
 import Button from '../styled-generics/Button'
@@ -177,7 +177,9 @@ function GameBoard({
 								: state.themeState.backgroundColour.light
 						}
 					>
-						<h3>Wow! 🤩 That's a great score! Try to beat your best! ✺◟(＾∇＾)◞✺</h3>
+						<h3 data-cy="game-lossText">
+							Wow! 🤩 That's a great score! Try to beat your best! ✺◟(＾∇＾)◞✺
+						</h3>
 						<Button
 							colour={
 								state.isDarkMode
@@ -190,13 +192,14 @@ function GameBoard({
 									: state.themeState.backgroundColour.light
 							}
 							onClick={handlePlayAgainBttnClick}
+							data-cy="bttn-playAgain"
 						>
 							Play again!
 						</Button>
 					</Wrapper>
 				)}
 				{state.isGameRunning &&
-					state.allEmojis?.map((emoji, index) => (
+					state.allEmojis?.map((emoji: Emoji, index: number) => (
 						<div className="emojis" key={index}>
 							<Card
 								colour={
@@ -211,10 +214,11 @@ function GameBoard({
 								}
 								onClick={handleCardClick}
 								data-emoji={emoji.character}
+								data-cy="emoji-card"
 							>
 								<p style={{ transform: 'scale(4)' }}>{emoji.character}</p>
 								{!state.isHardMode && (
-									<p>
+									<p data-cy="emoji-unicodeName">
 										{emoji.unicodeName.split(' ')[0].includes('E')
 											? emoji.unicodeName.split(' ').slice(1).join(' ')
 											: emoji.unicodeName}
